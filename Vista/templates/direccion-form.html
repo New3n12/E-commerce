@@ -1,0 +1,287 @@
+{{template "main" }}
+<link rel="stylesheet" href="/Vista/css/style-direc.css">
+<div class="container">
+    <div class="form__name">Formulario de Envío </div>
+    <div class="form__container">
+        {{if eq .Mensaje_Error "Edit"}}
+        <form action="/add-upd/direccion/update" method="POST">
+            <input type="hidden" name="id" value="{{.Descri2.ID}}">
+            <section class="form__personal container">
+                <div class="sections">
+                    <div class="box">1</div><span>Información Personal</span>
+                </div>
+                <div class="personal--form ">
+                    <div class="form--name">
+                        <div class="first">
+                            <label for="firstname">Nombre</label>
+                            <input placeholder="por ejemplo, Ricardo" name="firstname" id="firstname" type="text"
+                                required value="{{.Descri2.FirstName}}" />
+                        </div>
+                        <div class="last">
+                            <label for="lastname">Apellido</label>
+                            <input placeholder="por ejemplo, Bovell" name="lastname" id="lastname" type="text" required
+                                value="{{.Descri2.LastName}}" />
+                        </div>
+                        <div class="email">
+                            <label for="email">Correo Electrónico</label>
+                            <input placeholder="por ejemplo, rb@apple.com" name="email" id="email" type="email" required
+                                value="{{.Descri2.Email}}" />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="form__shipping container">
+                <div class="sections">
+                    <div class="box">2</div><span>Dirección de Envío</span>
+                </div>
+                <div class="shipping--form">
+                    <div class="form--shipping">
+                        <div class="row one">
+                            <div class="address">
+                                <label for="address-one">Dirección Línea 1</label>
+                                <input placeholder="" name="address-one" id="address-one" type="text" required
+                                    value="{{.Descri2.AddressOne}}" />
+                            </div>
+                            <div class="address-two">
+                                <label for="address-two">Dirección Línea 2</label>
+                                <input name="address-two" id="address-two" type="text" value="{{.Descri2.AddressTwo}}" />
+                            </div>
+                        </div>
+                        <div class="row two">
+                            <div class="city">
+                                <label for="city">Ciudad</label>
+                                <input placeholder="" name="city" id="city" type="text" required
+                                    value="{{.Descri2.City}}" />
+                            </div>
+                            <div class="state">
+                                <label for="state">Estado / Provincia / Región</label>
+                                <select name="state" id="state" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="Mexico">México</option>
+                                    <option value="Oaxaca">Oaxaca</option>
+                                    <option value="Puebla">Puebla</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <script>
+                            var selectElement = document.getElementById("state");
+                            for (var i = 0; i < selectElement.options.length; i++) {
+                                var optionValue = selectElement.options[i].value;
+                                if (optionValue == "{{.Descri2.State}}") {
+                                    selectElement.options[i].selected = true;
+                                    break
+                                }
+                            }
+                        </script>
+                        <div class="row three">
+                            <div class="zip">
+                                <label for="zip">Código Postal</label>
+                                <input placeholder="" name="zip" id="zip" maxlength="5" patter={0-9} type="text"
+                                    required value="{{.Descri2.Zip}}" />
+                            </div>
+                            <div class="country">
+                                <label for="country">País</label>
+                                <input placeholder="" name="country" id="country" type="text"
+                                    value="{{.Descri2.Country}}" readonly />
+                            </div>
+                        </div>
+                        <div class="row three">
+                            <div class="zip">
+                                <label for="telefono">Numero Celular</label>
+                                <input type="number" name="telefono" id="telefono" required
+                                    value="{{.Descri2.Telefono}}" />
+                            </div>
+                            <div class="country" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="form__question">
+                {{if eq .Descri2.Check 0}}
+                <input type="checkbox" name="checkbox" id="checkbox" />
+                {{else}}
+                <input type="checkbox" name="checkbox" id="checkbox" checked />
+                {{end}}
+                <p>¿Desea Guardar Su Direccion de Correo?</p>
+            </div>
+
+            <div class="form__confirmation">
+                <button>Confirmar Información</button>
+            </div>
+        </form>
+        {{else if eq .Mensaje_Error "New-Direc"}}
+        <form action="/add-upd/direccion/add" method="POST">
+            <section class="form__personal container">
+                <div class="sections">
+                    <div class="box">1</div><span>Información Personal</span>
+                </div>
+                <div class="personal--form ">
+                    <div class="form--name">
+                        <div class="first">
+                            <label for="firstname">Nombre</label>
+                            <input placeholder="por ejemplo, Ricardo" name="firstname" id="firstname" type="text"
+                                required />
+                        </div>
+                        <div class="last">
+                            <label for="lastname">Apellido</label>
+                            <input placeholder="por ejemplo, Bovell" name="lastname" id="lastname" type="text"
+                                required />
+                        </div>
+                        <div class="email">
+                            <label for="email">Correo Electrónico</label>
+                            <input placeholder="por ejemplo, rb@apple.com" name="email" id="email" type="email"
+                                required />
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="form__shipping container">
+                <div class="sections">
+                    <div class="box">2</div><span>Dirección de Envío</span>
+                </div>
+                <div class="shipping--form">
+                    <div class="form--shipping">
+                        <div class="row one">
+                            <div class="address">
+                                <label for="address-one">Dirección Línea 1</label>
+                                <input placeholder="" name="address-one" id="address-one" type="text" required />
+                            </div>
+                            <div class="address-two">
+                                <label for="address-two">Dirección Línea 2</label>
+                                <input name="address-two" id="address-two" type="text" />
+                            </div>
+                        </div>
+                        <div class="row two">
+                            <div class="city">
+                                <label for="city">Ciudad</label>
+                                <input placeholder="" name="city" id="city" type="text" required />
+                            </div>
+                            <div class="state">
+                                <label for="state">Estado / Provincia / Región</label>
+                                <select name="state" id="state" required>
+                                    <option value="">Seleccionar</option>
+                                    <option value="Mexico">México</option>
+                                    <option value="Oaxaca">Oaxaca</option>
+                                    <option value="Puebla">Puebla</option>
+                                </select>
+
+                            </div>
+                        </div>
+                        <div class="row three">
+                            <div class="zip">
+                                <label for="zip">Código Postal</label>
+                                <input placeholder="" name="zip" id="zip" type="text" required />
+                            </div>
+                            <div class="country">
+                                <label for="country">País</label>
+                                <input placeholder="" name="country" id="country" type="text" readonly value="Mexico" />
+                            </div>
+                        </div>
+                        <div class="row three">
+                            <div class="zip">
+                                <label for="telefono">Numero Celular</label>
+                                <input type="number" name="telefono" id="telefono" required />
+                            </div>
+                            <div class="country" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="form__question">
+                <input type="checkbox" name="checkbox" id="checkbox" checked />
+                <label for="checkbox">
+                    <i class="fas fa-check"></i>
+                    ¿Desea Guardar Su Dirección de Correo?
+                </label>
+            </div>
+
+            <div class="form__confirmation">
+                <button>Confirmar Información</button>
+            </div>
+        </form>
+        {{end}}
+        <div class="form__confirmation">
+            <a onclick="window.location.href='/productos/card/buy'" class="cancelar">Cancelar</a>
+        </div>
+    </div>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4cLEKkJBwixQCBI1ipLGswU5tx2K8xyM&libraries=places"></script>
+<script>
+    // Espera a que el documento HTML se cargue completamente
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtén los elementos de entrada y selección por sus ID
+        const addressInput = document.getElementById('address-one');
+        const cityInput = document.getElementById('city');
+        const zipInput = document.getElementById('zip');
+
+        // Crea un objeto de autocompletado de Google Places para cada campo
+        const autocompleteAddress = new google.maps.places.Autocomplete(addressInput);
+        const autocompleteCity = new google.maps.places.Autocomplete(cityInput);
+
+        // Escucha el evento de selección de un lugar para cada campo
+        autocompleteAddress.addListener('place_changed', function () {
+            const place = autocompleteAddress.getPlace();
+            setAddressFields(place);
+        });
+
+        autocompleteCity.addListener('place_changed', function () {
+            const place = autocompleteCity.getPlace();
+            setAddressFields(place);
+        });
+
+        // Función para llenar los campos de dirección y código postal
+        function setAddressFields(place) {
+            if (!place.geometry) {
+                // El lugar seleccionado no tiene geometría, probablemente no sea válido
+                return;
+            }
+
+            // Busca el componente de dirección y código postal en los detalles del lugar
+            let streetNumber = '';
+            let streetName = '';
+            let postalCode = '';
+
+            for (const component of place.address_components) {
+                if (component.types.includes('street_number')) {
+                    streetNumber = component.short_name;
+                } else if (component.types.includes('route')) {
+                    streetName = component.short_name;
+                } else if (component.types.includes('postal_code')) {
+                    postalCode = component.short_name;
+                }
+            }
+
+            // Rellena los campos de dirección y código postal
+            addressInput.value = `${streetNumber} ${streetName}`;
+            zipInput.value = postalCode;
+        }
+    });
+
+</script>
+{{template "footer"}}
+{{template "script"}}
+
+<script src="/Vista/js/app-dirc.js"></script>
+
+{{if eq .Mensaje_Error "Existe"}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ya Existe una Direccion!',
+            timer: 3000,
+            showConfirmButton: false
+        }).then(() => {
+            window.location.href = "/productos/card/buy";
+        });
+    });
+</script>
+{{end}}
+
+</body>
+
+</html>

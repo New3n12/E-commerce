@@ -1,0 +1,113 @@
+{{template "main" .}}
+{{template "card" .}}
+<link rel="stylesheet" href="/Vista/css/style-produc-planta.css">
+
+<div class="container">
+    <ol class="breadcrumb-list">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="/productos">Productos</a></li>
+        <li class="breadcrumb-item ">{{.Product.Nombre}}</li>
+    </ol>
+    <div class="grid product">
+        <div class="column-xs-12 column-md-7">
+            <div class="product-gallery">
+                <div class="product-image">
+                    <img class="active" src="data:image/jpeg;base64,{{.Product.Img1}}" alt=""/>
+                </div>
+                <ul class="image-list">
+                    <li class="image-item"><img src="data:image/jpeg;base64,{{.Product.Img1}}"></li>
+                    <li class="image-item"><img src="data:image/jpeg;base64,{{.Product.Img2}}"></li>
+                    <li class="image-item"><img src="data:image/jpeg;base64,{{.Product.Img3}}"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="column-xs-12 column-md-5">
+            <h1>{{.Product.Nombre}}</h1>
+            <h2>${{.Product.Precio}}</h2>
+            <div class="description">
+                <p>{{.Product.Descripcion}}</p>
+            </div>
+            <div class="card-btn-select">
+                <select id="cantp" class="combo-select">
+                    {{range .Product.Cantidad}}
+                        <option value="{{.}}">{{.}}</option>
+                    {{end}}
+                </select>
+                {{if ne $.UserId 0}}
+                <button onclick="let val1 = document.getElementById('cantp').value;
+                addCar('{{.Product.ID}}','{{$.UserId}}',val1)" class="add-to-cart">AGREGAR AL CARRITO</button>
+                {{else}}
+                <button onclick="let val2 = document.getElementById('cantp').value;
+                addCar('{{.Product.ID}}','0',val2)" class="add-to-cart">AGREGAR AL CARRITO</button>
+                {{end}}
+            </div>
+        </div>
+    </div>
+    <div class="header-title" data-aos="fade-up">
+        <h1>Sugerencias</h1>
+    </div>
+    
+    <div class="grid-product">
+
+        {{range .Products}}
+        <div class="product-item" style="cursor: pointer;">
+
+            <div class="p-portada">
+                <!--<a href="/productos/planta">-->
+                <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                    <img src="data:image/jpeg;base64,{{.Img1}}" alt="">
+                </a>
+                {{if ne .Isnew 0}}
+                <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                    <span class="stin stin-new">NUEVO</span>
+                </a>
+                <!-- <span class="stin stin-oferta">Oferta</span>-->
+                {{end}}
+            </div>
+
+            <div class="p-info">
+                <a style="text-decoration: none;" href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                    <h3>{{.Nombre}}</h3>
+
+                    <div class="precio">
+
+                        <span>MX ${{.Precio}}</span>
+
+                    </div>
+                </a>
+                {{if ne $.UserId 0}}
+                <button onclick="addCar('{{.ID}}','{{$.UserId}}','1')"
+                    class="hm-btn btn-primari uppercase">AGREGAR AL
+                    CARRITO</button>
+                {{else}}
+                <button onclick="addCar('{{.ID}}','0','1')" class="hm-btn btn-primari uppercase">AGREGAR AL
+                    CARRITO</button>
+                {{end}}
+            </div>
+
+        </div>
+        {{end}}
+
+    </div>
+    <br><br>
+</div>
+<!--Footer-->
+{{template "footer"}}
+<!--end-->
+{{template "script" .}}
+
+<script>
+    const activeImage = document.querySelector(".product-image .active");
+    const productImages = document.querySelectorAll(".image-list img");
+
+    function changeImage(e) {
+        activeImage.src = e.target.src;
+    }
+
+    function toggleNavigation() {
+        this.nextElementSibling.classList.toggle('active');
+    }
+
+    productImages.forEach(image => image.addEventListener("click", changeImage));
+
+</script>

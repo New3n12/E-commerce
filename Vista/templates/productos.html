@@ -1,0 +1,375 @@
+{{template "main" .}}
+{{template "card" .}}
+<!-- -->
+<link rel="stylesheet" href="/Vista/css/style-categoria.css">
+<div class="container">
+    <div class="header-title" data-aos="fade-up">
+        <h1>Productos</h1>
+    </div>
+</div>
+<style>
+    /**/
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .col-md-3 {
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 50px;
+    }
+
+    .col-md-9 {
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    @media (min-width: 768px) {
+        .col-md-3 {
+            -ms-flex: 0 0 25%;
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        .col-md-9 {
+            flex: 0 0 75%;
+            max-width: 75%;
+        }
+    }
+</style>
+<style>
+    * a {
+        text-decoration: none;
+    }
+
+    .container2 {
+        padding: 0 15px;
+        margin: 0 auto;
+    }
+
+    .filter-container {
+        display: none;
+        position: absolute;
+        right: 20px;
+        background-color: #4CAF50;
+        padding: 10px;
+        color: #fff;
+        cursor: pointer;
+        border-radius: 5%;
+        margin-top: -15%;
+
+    }
+
+    .filter-container i {
+        margin-right: 5px;
+    }
+
+
+    .sub-menu {
+        display: none;
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        color: #000;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 1;
+        width: 200px;
+        /* Ajusta el ancho del submenú */
+        transition-delay: 0.5s;
+        /* Retrasa el cierre del submenú */
+        border-radius: 5px;
+    }
+
+    .sub-sub-menu {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        z-index: 300;
+        width: 200px;
+
+    }
+
+    .filter-container.active .sub-menu,
+    .sub-menu.active .sub-sub-menu {
+        display: block;
+    }
+
+    @media screen and (min-width: 1px) {
+        .container2 {
+            width: auto;
+            max-width: 1422px !important;
+        }
+    }
+
+    /* Versión móvil */
+    @media (max-width: 767px) {
+
+        .app {
+            display: none;
+        }
+
+        .filter-container {
+            display: block;
+        }
+    }
+</style>
+
+<div class="container2">
+    <div class="row">
+        <!-- Columna de Categorías -->
+        <div class="col-md-3">
+            <div class="app">
+                <div class="app-header">
+                    <label class="app-header__icon" for="event-1"><span></span><span></span></label>
+                    <div class="app-header__title">Categoría</div>
+                </div>
+                <!--<form action="/productos" method="get" id="form">-->
+                <div class="app-body">
+                    <ul class="app-tasks">
+                        <li class="app-tasks__item">
+                            <label class="app-tasks__label">
+                                <input type="checkbox" checked disabled>
+                                <span>Todos</span>
+                                <div class="app-tasks__mark"></div>
+                            </label>
+                        </li>
+                        <li class="app-tasks__item">
+                            <label class="app-tasks__label">
+                                <input name="flores" type="checkbox" {{if eq .Categoria.Flores "checked"
+                                    }}checked{{end}}>
+                                <span>Flores</span>
+                                <div class="app-tasks__mark"></div>
+                            </label>
+                        </li>
+                        <li class="app-tasks__item">
+                            <label class="app-tasks__label">
+                                <input name="interior" type="checkbox" {{if eq .Categoria.Plantas_de_Interior "checked"
+                                    }}checked{{end}}>
+                                <span>Plantas de Interior</span>
+                                <div class="app-tasks__mark"></div>
+                            </label>
+                        </li>
+                        <li class="app-tasks__item">
+                            <label class="app-tasks__label">
+                                <input name="sombra" type="checkbox" {{if eq .Categoria.Plantas_de_Sombra "checked"
+                                    }}checked{{end}}>
+                                <span>Plantas de Sombra</span>
+                                <div class="app-tasks__mark"></div>
+                            </label>
+                        </li>
+                        <li class="app-tasks__item">
+                            <label class="app-tasks__label">
+                                <input type="checkbox" {{if eq .Categoria.Plantas_de_Exterior "checked"
+                                    }}checked{{end}}>
+                                <span>Plantas de Exterior</span>
+                                <div class="app-tasks__mark"></div>
+                            </label>
+                        </li>
+                        <li class="app-tasks__item">
+                            <label class="app-tasks__label">
+                                <input type="checkbox" {{if eq .Categoria.Acuaticas "checked" }}checked{{end}}>
+                                <span>Acuáticas</span>
+                                <div class="app-tasks__mark"></div>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="filter-container">
+                <i class="fas fa-filter"></i> Filtrar
+                <div class="sub-menu">
+                    <label class="app-tasks__label"
+                        style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);border-radius: 100px;">
+                        <input type="checkbox" checked disabled>
+                        <span>Todos</span>
+                        <div class="app-tasks__mark"></div>
+                    </label>
+
+                    <label class="app-tasks__label"
+                        style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);border-radius: 100px;">
+                        <input type="checkbox" {{if eq .Categoria.Flores "checked" }}checked{{end}}>
+                        <span>Flores</span>
+                        <div class="app-tasks__mark"></div>
+                    </label>
+                    <label class="app-tasks__label"
+                        style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);border-radius: 100px;">
+                        <input type="checkbox" {{if eq .Categoria.Plantas_de_Interior "checked" }}checked{{end}}>
+                        <span>Plantas de Interior</span>
+                        <div class="app-tasks__mark"></div>
+                    </label>
+                    <label class="app-tasks__label"
+                        style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);border-radius: 100px;">
+                        <input name="sombra" type="checkbox" {{if eq .Categoria.Plantas_de_Sombra "checked"
+                            }}checked{{end}}>
+                        <span>Plantas de Sombra</span>
+                        <div class="app-tasks__mark"></div>
+                    </label>
+                    <label class="app-tasks__label"
+                        style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);border-radius: 100px;">
+                        <input type="checkbox" {{if eq .Categoria.Plantas_de_Exterior "checked" }}checked{{end}}>
+                        <span>Plantas de Exterior</span>
+                        <div class="app-tasks__mark"></div>
+                    </label>
+                    <label class="app-tasks__label"
+                        style="box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);border-radius: 100px;">
+                        <input type="checkbox" {{if eq .Categoria.Acuaticas "checked" }}checked{{end}}>
+                        <span>Acuáticas</span>
+                        <div class="app-tasks__mark"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!--</form>-->
+        <!-- Columna de Productos -->
+        <div class="col-md-9">
+            <div class="grid-product">
+                {{range .Products}}
+                <div class="product-item" style="cursor: pointer;">
+
+                    <div class="p-portada">
+                        <!--<a href="/productos/planta">-->
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <img src="data:image/jpeg;base64,{{.Img1}}" alt="">
+                        </a>
+                        {{if ne .Isnew 0}}
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <span class="stin stin-new">NUEVO</span>
+                        </a>
+                        <!-- <span class="stin stin-oferta">Oferta</span>-->
+                        {{end}}
+                    </div>
+
+                    <div class="p-info">
+                        <a style="text-decoration: none;" href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <h3>{{.Nombre}}</h3>
+
+                            <div class="precio">
+
+                                <span>MX ${{.Precio}}</span>
+
+                            </div>
+                        </a>
+                        {{if ne $.UserId 0}}
+                        <button onclick="addCar('{{.ID}}','{{$.UserId}}','1')"
+                            class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{else}}
+                        <button onclick="addCar('{{.ID}}','0','1')" class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{end}}
+                    </div>
+
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3 d-flex justify-content-center"> <!-- Centra el contenido horizontalmente -->
+            <nav aria-label="Page navigation">
+                <ul class="pagination"> <!-- Agrega el estilo de fondo verde -->
+                    <li class="page-item"><a class="page-link" href="#">Anterior</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Siguiente</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+<!--Footer-->
+{{template "footer"}}
+<!--end-->
+{{template "script" .}}
+<script>
+    const checkboxes = document.querySelectorAll('.app-tasks__label input[type="checkbox"]');
+    console.log(checkboxes);
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', () => {
+            var data = [];
+            checkboxes.forEach(item => {
+                if (item.checked) {
+                    data.push(item.nextElementSibling.textContent);
+                }
+            });
+            const queryString = window.location.search;
+            const queryParams = new URLSearchParams(queryString);
+            var sqlfinal;
+            var datosFiltrados;
+            if (queryParams.has('sql')) {
+                const count = {};
+                data.forEach(item => {
+                    count[item] = (count[item] || 0) + 1;
+                });
+                const datosSinDuplicados = data.filter(item => count[item] > 1);
+                datosFiltrados = data.filter(item => count[item] === 1);
+                sqlfinal = [...new Set(datosSinDuplicados)];
+                var paramet = queryParams.get('sql');
+                if (data.length > 3) {
+                    checkboxes.forEach(item => {
+                        datosFiltrados.forEach(item2 => {
+                            if (paramet.indexOf(item2) === -1) { // Verifica si item2 NO está en paramet
+                                if (item.nextElementSibling.textContent === item2 && item.checked) {
+                                    sqlfinal.push(item2);
+                                }
+                            }
+                        });
+                    });
+                }
+            } else {
+                sqlfinal = [...new Set(data)];             
+            }
+            const sql = "sql=" + sqlfinal.join(',');
+            const redirectUrl = sql === "sql=Todos" ? "/productos" : "/productos?" + sql;          
+            window.location.href =redirectUrl;
+        });
+    });
+
+</script>
+<script>
+
+    $(".filter-container").click(function (e) {
+        if ($(this).hasClass("active")) {
+            // Si ya está activo, cierra el submenú
+            $(this).removeClass("active");
+        } else {
+            // Si no está activo, abre el submenú y cierra otros submenús
+            $(".filter-container").removeClass("active");
+            $(this).addClass("active");
+        }
+    });
+
+    $(".sub-menu").click(function (e) {
+        e.stopPropagation();
+        $(this).toggleClass("active");
+    });
+
+    // Cierra el submenú si se hace clic fuera del filtro o del submenú
+    $(document).click(function (e) {
+        if (!$(".filter-container").is(e.target) && !$(".filter-container").has(e.target).length) {
+            $(".filter-container").removeClass("active");
+            $(".sub-menu").removeClass("active");
+        }
+    });
+
+</script>
+</body>
+
+</html>

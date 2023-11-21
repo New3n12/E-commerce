@@ -1,0 +1,114 @@
+{{template "main"}}
+<style>
+    body {
+  font-family: 'Pontano Sans', sans-serif;
+  line-height: 1.5;
+}
+
+    .mainbox {
+        margin: auto;
+        height: 600px;
+        width: 600px;
+        position: relative;
+    }
+
+    .err {
+        color: #000000;
+        font-size: 11rem;
+        font-family: 'Nunito Sans', sans-serif;
+        position: absolute;
+        left: 20%;
+        top: 8%;
+    }
+    .err2 {
+        color: #000000;
+        font-size: 11rem;
+        font-family: 'Nunito Sans', sans-serif;
+        position: absolute;
+        left: 68%;
+        top: 8%;
+    }
+
+    .msg {
+        text-align: center;
+        font-size: 1.6rem;
+        position: absolute;
+        left: 16%;
+        top: 45%;
+        width: 75%;
+    }
+
+    .msg a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+    }
+
+    .msg a:hover {
+        text-decoration: underline;
+    }
+
+    .farrr {
+        position: absolute;
+        font-size: 8.5rem;
+        left: 34%;
+        top: 5%;
+        width: 38%;
+        color: #030303;
+    }
+
+    .farr-spin {
+        -webkit-animation: fa-spin 2s linear infinite;
+        animation: fa-spin 2s linear infinite;
+    }
+
+ 
+/* Media queries para responsive */
+
+@media (max-width: 768px) {
+  .mainbox {
+    width: 90%;
+    height: 400px;
+  }
+  
+  .err,
+  .err2 {
+    font-size: 5rem;
+  }
+  
+  .msg {
+    font-size: 1.2rem;
+  }
+  
+  .farrr {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Estilos para mobile */
+  
+  .mainbox {
+    width: 96%;
+    height: 400px;
+  }
+
+  .msg {
+    top: 35%;
+    font-size: 1rem;
+  }
+
+}
+</style>
+<div class="container">
+    <!---->
+    <div class="mainbox">
+        <div class="err">4</div>
+        <i class="farrr farr-spin"><img src="/Vista/img/found.png" style="width: 40%;"></i>
+        <div class="err2">4</div>
+        <div class="msg">¿Quizás esta página se movió? ¿Lo eliminaron? ¿Esconderse en cuarentena? ¿Nunca existió en
+            primer lugar?<p>Vamos <a href="/">/Inicio</a> y prueba desde allí.</p>
+        </div>
+    </div>
+</div>
+<!--Footer-->
+{{template "footer"}}

@@ -1,0 +1,274 @@
+{{define "main"}}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flowers</title>
+
+    <!-- FUENTE GOOGLE FONTS : Poppins -->
+    <link href="/Vista/css/fonts.css" rel="stylesheet">
+
+    <!-- ICONS: Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- ICONS: Line Awesome -->
+    <link rel="stylesheet"
+        href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+    <!-- Animaciones AOS -->
+    <link rel="stylesheet" href="/Vista/css/aos.css">
+    <!-- En el <head> -->
+
+    <!-- Mis Estilos -->
+    <link rel="stylesheet" href="/Vista/css/styles-all.css" />
+
+</head>
+
+<body>
+    <div class="header">
+        <p>Flores a Domicilio | Envío a todo México</p>
+    </div>
+
+    <div class="hm-wrapper">
+        <!-- =================================
+           HEADER MENU
+        ================================== -->
+        <div class="hm-header">
+
+            <div class="container">
+                <div class="header-menu">
+
+                    <div class="hm-logo">
+                        <a href="/" >
+                            <img src="/Vista/img/logo.png " alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{end}}
+        <!-- =================================
+           FOOTER
+        ================================== -->
+        {{define "footer"}}
+        <style>
+            /*redes*/
+            .wrapper {
+                display: inline-flex;
+                list-style: none;
+            }
+
+            .wrapper .icon {
+                position: relative;
+                background: #ffffff;
+                border-radius: 50%;
+                padding: 15px;
+                margin: 10px;
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .wrapper .tooltip {
+                position: absolute;
+                top: 0;
+                font-size: 14px;
+                background: #ffffff;
+                color: #ffffff;
+                padding: 5px 8px;
+                border-radius: 5px;
+                box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .wrapper .tooltip::before {
+                position: absolute;
+                content: "";
+                height: 8px;
+                width: 8px;
+                background: #ffffff;
+                bottom: -3px;
+                left: 50%;
+                transform: translate(-50%) rotate(45deg);
+                transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            }
+
+            .wrapper .icon:hover .tooltip {
+                top: -45px;
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+            }
+
+            .wrapper .icon:hover span,
+            .wrapper .icon:hover .tooltip {
+                text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+            }
+
+            .wrapper .facebook:hover,
+            .wrapper .facebook:hover .tooltip,
+            .wrapper .facebook:hover .tooltip::before {
+                background: #1877F2;
+                color: #ffffff;
+            }
+
+            .wrapper .twitter:hover,
+            .wrapper .twitter:hover .tooltip,
+            .wrapper .twitter:hover .tooltip::before {
+                background: #1DA1F2;
+                color: #ffffff;
+            }
+
+            .wrapper .instagram:hover,
+            .wrapper .instagram:hover .tooltip,
+            .wrapper .instagram:hover .tooltip::before {
+                background: #E4405F;
+                color: #ffffff;
+            }
+
+            .wrapper .github:hover,
+            .wrapper .github:hover .tooltip,
+            .wrapper .github:hover .tooltip::before {
+                background: #333333;
+                color: #ffffff;
+            }
+
+            .wrapper .youtube:hover,
+            .wrapper .youtube:hover .tooltip,
+            .wrapper .youtube:hover .tooltip::before {
+                background: #CD201F;
+                color: #ffffff;
+            }
+            .redes{
+                padding-top: 5%;
+            }
+        </style>
+        <footer>
+
+            <div class="container" id="contacto">
+
+                <div class="foo-row">
+                    <div class="foo-col">
+                        <h2>Suscríbete <br>a nuestro newsletter</h2>
+                        <form action="" method="GET">
+
+                            <div class="f-input">
+                                <input type="text" placeholder="Ingrese su correo">
+                                <button type="submit" class="hm-btn-round btn-primari"><i
+                                        class="far fa-paper-plane"></i></button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div class="foo-col">
+                        <ul>
+                            <ul>
+                                <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                                <li><a href="/productos"><i class="fas fa-box"></i> Productos</a></li>
+                                <li><a href="/servicios"><i class="fas fa-cogs"></i> Servicios</a></li>
+                                <li><a href="/#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                            </ul>
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div class="redes">
+                    <ul class="wrapper">
+                        <li class="icon facebook">
+                            <span class="tooltip">Facebook</span>
+                            <span><i class="fab fa-facebook-f"></i></span>
+                        </li>
+                        <li class="icon twitter">
+                            <span class="tooltip">Twitter</span>
+                            <span><i class="fab fa-twitter"></i></span>
+                        </li>
+                        <li class="icon instagram">
+                            <span class="tooltip">Instagram</span>
+                            <span><i class="fab fa-instagram"></i></span>
+                        </li>
+                        <!--<li class="icon github">
+                            <span class="tooltip">Tiktok</span>
+                            <span><i class="fab fa-tiktok"></i></span>
+                        </li>
+                        <li class="icon youtube">
+                            <span class="tooltip">Youtube</span>
+                            <span><i class="fab fa-youtube"></i></span>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+
+        </footer>
+        <!--<style>
+            .col-lg-6 {
+                position: relative;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;
+                margin-bottom: 20px;
+            }
+
+            .copyright {
+                text-align: left;
+                font-size: 12px;
+            }
+
+            .btn-default {
+                color: #333;
+                background-color: #fff;
+                border-color: #ccc;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 6px 12px;
+                margin-bottom: 0;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 1.42857143;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                cursor: pointer;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                background-image: none;
+                border: 1px solid transparent;
+                border-radius: 4px;
+            }
+        </style>-->
+
+        <div class="foo-copy">
+            <div class="container">
+                <p>By Quantum © Todos los derechos reservados</p>
+            </div>
+            <!--<div class="col-lg-6">
+                <div class="copyright">
+                    <button type="button" class="btn btn-default">By Juan Diego -> Unistmo Campus Ixtepec <i style="font-weight:bold;" class="fa fa-code"></i>
+                    </button>
+                </div>
+            </div>-->
+        </div>
+        {{end}}
+
+        {{define "script"}}
+        <script src="/Vista/js/sweetalert2@11.js"></script>
+        <script src="/Vista/js/jquery-3.7.0.min.js"></script>        
+        {{end}}

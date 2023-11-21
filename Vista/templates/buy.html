@@ -1,0 +1,283 @@
+{{template "main"}}
+<link rel="stylesheet" href="/Vista/css/style-buy.css">
+
+<style>
+    .address-section {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+    .address-heading {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .address-details p {
+        margin: 5px 0;
+    }
+
+    .add-instructions-link,
+    .edit-address-link {
+        color: #57affb;
+        text-decoration: none;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .add-instructions-link:hover,
+    .edit-address-link:hover {
+        text-decoration: underline;
+    }
+</style>
+<link rel="stylesheet" href="/Vista/css/style-modal.css">
+
+<article class="card">
+    <div class="container">
+        <div class="modal-frame">
+            <div class="modal">
+                <div class="modal-inset">
+                    <div class="button close"><i class="fa fa-close"></i></div>
+                    <div class="modal-body">
+                        <h3>Direcciones Agregadas</h3>
+                    </div>
+                    {{range .Descri}}
+                    <div class="address-section">
+                        <h3 class="address-heading">Dirección de envío</h3>
+                        {{if ne .ID 0}}
+                        <div class="address-details">
+                            <p class="address-name">{{.FirstName}} {{.LastName}}</p>
+                            <p class="address-line">{{.AddressOne}}</p>
+                            <p class="address-line">{{.AddressTwo}}</p>
+                            <p class="address-city">{{.City}}, {{.State}}, {{.Zip}}</p>
+                        </div>
+                        {{end}}
+                        <div class="address-actions">
+                            <a class="edit-address-link" href="/productos/card/direccion-delete/{{.ID}}">Eliminar</a>
+                            <a class="edit-address-link" href="/productos/card/direccion/{{.ID}}">Editar</a>
+                            <a class="edit-address-link" href="/productos/card/direccion-cambiar/{{.ID}}">Seleccionar</a>
+                        </div>
+                    </div>
+                    {{end}}
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-overlay"></div>
+        <div class="card-title">
+            <h2>Pago</h2>
+        </div>
+        {{if and (eq .Descri2.Check 0) (ne .Descri2.ID 0)}}
+        <h1 style="color: red;">ADVERTENCIA!!</h1>
+        <p style="color: red;"> SU DIRECCION DE ENVIO NO SE GUARDARA</p>
+        {{end}}
+        <div class="address-section">
+            <h3 class="address-heading">Dirección de envío</h3>
+            {{if ne .Descri2.ID 0}}
+            <div class="address-details">
+                <p class="address-name">{{.Descri2.FirstName}} {{.Descri2.LastName}}</p>
+                <p class="address-line">{{.Descri2.AddressOne}}</p>
+                <p class="address-line">{{.Descri2.AddressTwo}}</p>
+                <p class="address-city">{{.Descri2.City}}, {{.Descri2.State}}, {{.Descri2.Zip}}</p>
+            </div>
+            {{end}}
+            <div class="address-actions">
+                {{if ne .Descri2.ID 0}}
+                <a class="add-instructions-link" href="/productos/card/direccion/new">Agregar nueva direccion</a>
+                {{if ne (len .Descri) 0}}
+                <a class="edit-address-link open" style="cursor: pointer;">Cambiar</a>
+                {{else}}
+                <a class="edit-address-link" href="/productos/card/direccion/{{.Descri2.ID}}">Editar</a>
+                {{end}}
+                {{else}}
+                <a class="edit-address-link" href="/productos/card/direccion/new">Agregar</a>
+                {{end}}
+            </div>
+        </div>
+
+        <style>
+            .load {
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                visibility: hidden;
+                /*change these sizes to fit into your project*/
+                width: 100px;
+                height: 100px;
+                z-index: 999;
+            }
+
+            .load hr {
+                border: 0;
+                margin: 0;
+                width: 40%;
+                height: 40%;
+                position: absolute;
+                border-radius: 50%;
+                animation: spin 2s ease infinite
+            }
+
+            .load :first-child {
+                background: #19A68C;
+                animation-delay: -1.5s
+            }
+
+            .load :nth-child(2) {
+                background: #F63D3A;
+                animation-delay: -1s
+            }
+
+            .load :nth-child(3) {
+                background: #FDA543;
+                animation-delay: -0.5s
+            }
+
+            .load :last-child {
+                background: #193B48
+            }
+
+            @keyframes spin {
+
+                0%,
+                100% {
+                    transform: translate(0)
+                }
+
+                25% {
+                    transform: translate(160%)
+                }
+
+                50% {
+                    transform: translate(160%, 160%)
+                }
+
+                75% {
+                    transform: translate(0, 160%)
+                }
+            }
+        </style>
+        <div class="load" id="loadpay">
+            <hr />
+            <hr />
+            <hr />
+            <hr />
+        </div>
+
+        <div class="card-body">
+            <div class="payment-type">
+                <h4>Elija el método de pago a continuación</h4>
+                <div class="types flex justify-space-between">
+                    <!--<div class="type selected" id="tarjeta">
+                        <div class="logo">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <div class="text">
+                            <p>Pagar Con Tarjeta</p>
+                        </div>
+                    </div>-->
+                    <div class="type selected" id="paypal">
+                        <div class="logo">
+                            <i class="fab fa-paypal"></i>
+                        </div>
+                        <div class="text">
+                            <p>Pagar Con PayPal</p>
+                        </div>
+                    </div>
+                    <!--<div class="type" id="oxxo">
+                        <div class="logo">
+                            <i class="fa-solid fa-shop"></i>
+                        </div>
+                        <div class="text">
+                            <p>Pagar Con Oxxo</p>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="card-actions flex justify-space-between">
+            <div class="flex-start">
+                <button onclick="window.location.href ='/productos'" class="button button-secondary">Regresar a
+                    Productos</button>
+            </div>
+            <div class="flex-end">
+                <button onclick="window.location.href ='/productos/card'" class="button button-link">Regresar al
+                    Carrito</button>
+                <button onclick="securityPay()" class="button button-primary">Realizar Pago</button>
+            </div>
+        </div>
+    </div>
+</article>
+
+{{template "footer"}}
+{{template "script"}}
+
+<script src="/Vista/js/security-pay.js"></script>
+
+<!--<script>
+    const types = document.querySelectorAll('.type');
+
+    types.forEach(type => {
+        type.addEventListener('click', () => {
+            types.forEach(t => t.classList.remove('selected'));
+            type.classList.add('selected');
+        });
+    });
+</script>-->
+<script>
+
+    $(document).ready(function () {
+        var $modal = $('.modal-frame');
+        var $overlay = $('.modal-overlay');
+
+        function openModal() {
+            $overlay.addClass('state-show');
+            $modal.removeClass('state-leave').addClass('state-appear');
+        }
+
+        function closeModal() {
+            $overlay.removeClass('state-show');
+            $modal.removeClass('state-appear').addClass('state-leave');
+        }
+
+        $('.open').on('click', openModal);
+        $('.close').on('click', closeModal);
+
+        $modal.bind('webkitAnimationEnd oanimationend msAnimationEnd animationend', function (e) {
+            if ($modal.hasClass('state-leave')) {
+                $modal.removeClass('state-leave');
+            }
+        });
+
+        // Cerrar el modal haciendo clic fuera del contenido del modal
+    });
+
+</script>
+
+{{if eq .Mensaje_Error "update"}}
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        icon: 'success',
+        title: 'Se Actualizo',
+        text: 'Se actualizo la nueva direccion!',
+        timer: 2000,
+        showConfirmButton: false
+      });
+    });
+</script>
+{{else if eq .Mensaje_Error "delete"}}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+     Swal.fire({
+       icon: 'success',
+       title: 'Se Elimino',
+       text: 'Se elimino correctamente!',
+       timer: 2000,
+       showConfirmButton: false
+     });
+   });
+</script>
+{{end}}

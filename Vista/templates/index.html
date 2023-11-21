@@ -1,0 +1,622 @@
+{{template "main" .}}
+{{template "card" .}}
+<style>
+    .msjscroll {
+        margin-right: 450px;
+        margin-left: 480px;
+        text-indent: 20px;
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 1024px) {
+        .msjscroll {
+            margin-right: 250px;
+            margin-left: 280px;
+        }
+    }
+
+    @media screen and (max-width: 800px) {
+        .msjscroll {
+            margin-right: 150px;
+            margin-left: 180px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .msjscroll {
+            margin-right: 20px;
+            margin-left: 20px;
+            font-size: 16px;
+        }
+    }
+</style>
+<marquee scrollamount="6" class="msjscroll">
+    <i class="las la-truck"></i>
+    Hacemos envíos a todo México &nbsp; &nbsp;|<i class="las la-people-carry"></i> Entregas en 48 horas en Ciudad de
+    México
+</marquee>
+<link rel="stylesheet" href="/Vista/css/style-testimonios.css">
+<!-- =================================
+           BANNER
+================================== -->
+<div class="hm-banner">
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="/Vista/img/p-3.png" style="width: 100%;" alt="">
+            <div class="popup">
+                <div class="popup-content">
+                    <h1>Envios en 48 Horas</h1>
+                    <p>Compra hoy y en cuanto se confirme tu compra te 
+                        enviamos tus plantas en un lapso de 48 horas!!!</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mySlides fade">
+            <img src="/Vista/img/p-1.png" style="width: 100%;" alt="">
+            <div class="popup">
+                <div class="popup-content">
+                    <h1>Flores y Plantas de Alta Calidad</h1>
+                    <p>Descubre nuestra increíble selección de flores y plantas de la más alta calidad. ¡Lleva la
+                        belleza de la naturaleza a tu hogar hoy mismo!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mySlides fade">
+            <img src="/Vista/img/p-2.png" style="width: 100%;" alt="">
+            <div class="popup">
+                <div class="popup-content">
+                    <h1>Fuentes y Adornos de Alta Calidad</h1>
+                    <p>Descubre nuestra increíble selección de fuentes y adornos de la más alta calidad. 
+                        ¡Visita todo nuestro servicios que ofrecemos!</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="text-align:center;display: none;">
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+</div>
+<!-- =================================
+           HOME PRODUCTOS DESTACADOS
+        ================================== -->
+<div class="hm-page-block bg-fondo">
+
+    <div class="container">
+
+        <div class="header-title" data-aos="fade-up" data-aos-duration="3000">
+            <h1>Productos populares</h1>
+        </div>
+
+        <!-- TABS -->
+        <ul class="hm-tabs" data-aos="fade-up">
+            <li class="hm-tab-link">
+                Flores
+            </li>
+
+            <li class="hm-tab-link ">
+                Plantas de Interior
+            </li>
+
+            <li class="hm-tab-link ">
+                Plantas de Exterior
+            </li>
+
+            <li class="hm-tab-link ative">
+                En oferta
+            </li>
+
+        </ul>
+
+        <!-- CONTENIDO DE LOS TABS -->
+        <!-- Flores -->
+        <div class="tabs-content" data-aos="fade-up">
+
+            <div class="grid-product">
+
+                {{range .Products_1}}
+                <div class="product-item" style="cursor: pointer;">
+
+                    <div class="p-portada">
+                        <!--<a href="/productos/planta">-->
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <img src="data:image/jpeg;base64,{{.Img1}}" alt="">
+                        </a>
+                        {{if ne .Isnew 0}}
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <span class="stin stin-new">NUEVO</span>
+                        </a>
+                        <!-- <span class="stin stin-oferta">Oferta</span>-->
+                        {{end}}
+                    </div>
+
+                    <div class="p-info">
+                        <a style="text-decoration: none;" href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <h3>{{.Nombre}}</h3>
+
+                            <div class="precio">
+
+                                <span>MX ${{.Precio}}</span>
+
+                            </div>
+                        </a>
+                        {{if ne $.UserId 0}}
+                        <button onclick="addCar('{{.ID}}','{{$.UserId}}','1')"
+                            class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{else}}
+                        <button onclick="addCar('{{.ID}}','0','1')" class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{end}}
+                    </div>
+
+                </div>
+                {{end}}
+
+            </div>
+
+        </div>
+
+        <!-- Plantas de Interior -->
+        <div class="tabs-content" data-aos="fade-up">
+
+            <div class="grid-product">
+
+                {{range .Products_2}}
+                <div class="product-item" style="cursor: pointer;">
+
+                    <div class="p-portada">
+                        <!--<a href="/productos/planta">-->
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <img src="data:image/jpeg;base64,{{.Img1}}" alt="">
+                        </a>
+                        {{if ne .Isnew 0}}
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <span class="stin stin-new">NUEVO</span>
+                        </a>
+                        <!-- <span class="stin stin-oferta">Oferta</span>-->
+                        {{end}}
+                    </div>
+
+                    <div class="p-info">
+                        <a style="text-decoration: none;" href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <h3>{{.Nombre}}</h3>
+
+                            <div class="precio">
+
+                                <span>MX ${{.Precio}}</span>
+
+                            </div>
+                        </a>
+                        {{if ne $.UserId 0}}
+                        <button onclick="addCar('{{.ID}}','{{$.UserId}}','1')"
+                            class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{else}}
+                        <button onclick="addCar('{{.ID}}','0','1')" class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{end}}
+                    </div>
+
+                </div>
+                {{end}}
+
+            </div>
+
+        </div>
+
+        <!--  Plantas de Exterior -->
+        <div class="tabs-content" data-aos="fade-up">
+
+            <div class="grid-product">
+
+                {{range .Products_3}}
+                <div class="product-item" style="cursor: pointer;">
+
+                    <div class="p-portada">
+                        <!--<a href="/productos/planta">-->
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <img src="data:image/jpeg;base64,{{.Img1}}" alt="">
+                        </a>
+                        {{if ne .Isnew 0}}
+                        <a href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <span class="stin stin-new">NUEVO</span>
+                        </a>
+                        <!-- <span class="stin stin-oferta">Oferta</span>-->
+                        {{end}}
+                    </div>
+
+                    <div class="p-info">
+                        <a style="text-decoration: none;" href="/productos/planta/{{.ID}}/{{.ID_Cat}}">
+                            <h3>{{.Nombre}}</h3>
+
+                            <div class="precio">
+
+                                <span>MX ${{.Precio}}</span>
+
+                            </div>
+                        </a>
+                        {{if ne $.UserId 0}}
+                        <button onclick="addCar('{{.ID}}','{{$.UserId}}','1')"
+                            class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{else}}
+                        <button onclick="addCar('{{.ID}}','0','1')" class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</button>
+                        {{end}}
+                    </div>
+
+                </div>
+                {{end}}
+
+            </div>
+
+        </div>
+
+        <!-- En oferta -->
+        <div class="tabs-content" data-aos="fade-up">
+
+            <div class="grid-product">
+
+                <!--<div class="product-item">
+                    <div class="p-portada">
+                        <a href="">
+                            <img src="img/8.jpg" alt="">
+                        </a>
+                        <span class="stin stin-oferta">Oferta</span>
+                    </div>
+
+                    <div class="p-info">
+                        <a href="">
+                            <h3>Lorem ipsum dolor sit, amet consectetur</h3>
+                        </a>
+                        <div class="precio">
+                            <span>S/ 00.00</span>
+                            <span class="thash">S/ 00.00</span>
+                        </div>
+                        <a onclick="addCar()" class="hm-btn btn-primari uppercase">AGREGAR AL
+                            CARRITO</a>
+                    </div>
+
+                </div>-->
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- =================================
+           HOME CATEGROIAS
+================================== -->
+<div class="hm-page-block">
+    <div class="container">
+        <div class="header-title">
+            <h1 data-aos="fade-up" data-aos-duration="3000">Servicios</h1>
+        </div>
+
+        <div class="hm-grid-category">
+
+            <div class="grid-item" data-aos="fade-up" data-aos-duration="1000">
+                <a href="/servicios">
+                    <img src="/Vista/img/garden.png" alt="">
+                    <div class="c-info">
+                        <h3>Jardineria</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid-item" data-aos="fade-up" data-aos-duration="1500">
+                <a href="/servicios">
+                    <img src="/Vista/img/fuente.png" alt="">
+                    <div class="c-info">
+                        <h3>Fuetes</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid-item" data-aos="fade-up" data-aos-duration="2000">
+                <a href="/servicios">
+                    <img src="/Vista/img/decoracion.png" alt="">
+                    <div class="c-info">
+                        <h3>Lo mejor en Adornos</h3>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid-item" data-aos="fade-up" data-aos-duration="2000">
+                <a href="/servicios">
+                    <img src="/Vista/img/maceta.png" alt="">
+                    <div class="c-info">
+                        <h3>Accesorios</h3>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="hm-page-block">
+    <div class="container">
+        <div class="testimonials">
+            <div class="testimonial-inner">
+                <div class="heading wow fadeIn text-center">
+                    <h2>Nuestros
+                        <span>clientes opinan</span>
+                    </h2>
+                    <p>En esta sección de testimonios, nuestros clientes comparten sus vivencias personales. Desde bodas
+                        y cumpleaños hasta disculpas y sorpresas espontáneas, estas historias capturan la esencia de lo
+                        que representamos.
+                        <br>
+                        Con cada testimonio, permitimos que las flores hablen por sí mismas, compartiendo cómo hemos
+                        sido parte de ocasiones significativas y memorables.
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="testimonial">
+                            <img src="/Vista/img/maria.jpg" alt="">
+                            <div class="name">María Vargas</div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p style=" text-align: justify;">"Quiero expresar mi gratitud a Flores Xochimilco por brindar un servicio excepcional.
+                                Hice un pedido de un hermoso ramo de flores para el cumpleaños de mi madre, y quedé
+                                impresionada por la frescura y la calidad de las flores. Además, la entrega fue puntual
+                                y el equipo fue muy amable. Mi madre quedó encantada con el regalo. Definitivamente
+                                seguiré confiando en Flores Xochimilco para todas mis ocasiones especiales."</p>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="testimonial">
+                            <img src="https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                                alt="">
+                            <div class="name">Javier Martínez</div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p style=" text-align: justify;"> "No suelo dejar testimonios, pero esta vez quiero hacer una excepción. Estoy asombrado
+                                por la experiencia que tuve con Flores Xochimilco. Necesitaba flores urgentemente para
+                                pedir disculpas a mi esposa después de una discusión. Realicé el pedido en línea y, para
+                                mi sorpresa, las flores llegaron en menos de dos horas. La presentación era impecable y
+                                las flores lucían radiantes. Gracias a Flores Xochimilco, logré arreglar las cosas de
+                                una manera hermosa."</p>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="testimonial">
+                            <img src="/Vista/img/alejandra.png" alt="">
+                            <div class="name">Alejandra Torres</div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p style=" text-align: justify;">"Recomendaré Flores Xochimilco a todos mis amigos y familiares. Recientemente, planifiqué
+                                una fiesta de aniversario para mis padres y decidí decorar el lugar con arreglos
+                                florales de Flores Xochimilco. No solo fue fácil elegir entre la amplia variedad de
+                                opciones, sino que los arreglos superaron todas mis expectativas. El diseño era elegante
+                                y las flores duraron frescas durante todo el evento. ¡Gracias por contribuir a que la
+                                celebración fuera inolvidable!"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="text" style="visibility: hidden;" id="contact">
+</div>
+<div class="testimonials">
+    <div class="testimonial-inner">
+        <div class="heading wow fadeIn text-center">
+            <h2>Para mas Informacion
+                <span>CONTACTANOS</span>
+            </h2>
+        </div>
+    </div>
+</div>
+<style>
+    .contact {
+        background-color: #FFF;
+        padding-bottom: 100px;
+        display: flex;
+        align-items: center;
+        border-radius: 5px;
+        padding-top: 5vh;
+    }
+
+    .image {
+        width: 50%;
+        text-align: center;
+    }
+
+    .image img {
+        max-width: 50%;
+    }
+
+    .touch {
+        text-align: center;
+    }
+
+    .touch h2 {
+        margin-bottom: 25px;
+        color: #333;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .touch form input:not([type="button"]),
+    .touch form textarea {
+        width: 70%;
+        padding: 10px 20px;
+        margin-bottom: 13px;
+        color: #666;
+        background-color: #E6E6E6;
+        border: 0;
+        border-radius: 20px;
+        outline: none;
+    }
+
+    .touch form textarea {
+        height: 100px;
+        resize: none;
+    }
+
+    .touch form input::placeholder,
+    .touch form textarea::placeholder {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .touch form .btn {
+        position: relative;
+        width: 130px;
+        margin: auto;
+    }
+
+    .touch form input[type="button"] {
+        display: block;
+        margin: auto;
+        padding: 10px 25px 10px 0;
+        border: 0;
+        border-radius: 20px;
+        color: #FFF;
+        background-color: #57b846;
+        width: 100%;
+        font-size: 11px;
+        outline: none;
+        cursor: pointer;
+        transition: .5s;
+    }
+
+    .touch form input[type="button"]:hover {
+        background-color: #333;
+    }
+
+    .touch form input[type="button"]~i {
+        position: absolute;
+        right: 25px;
+        top: 11px;
+        color: #FFF;
+        font-size: 11px;
+        pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        .contact {
+            flex-direction: column;
+            padding-top: 5vh;
+        }
+
+        .image {
+            text-align: center;
+            padding-bottom: 40px;
+        }
+    }
+</style>
+<div class="container">
+
+    <div class="contact">
+
+        <div class="image">
+            <img src="/Vista/img/mail.png">
+        </div>
+
+        <div class="touch">
+            <h2>Contacto</h2>
+            <form action="/send/mail" method="post" id="contac">
+                <input type="text" placeholder="Name" name="nombre" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="text" placeholder="Subject" name="subject" required>
+                <textarea placeholder="Message" name="contenido" required></textarea>
+                <div class="btn">
+                    <input type="button" onclick="contac.submit()" value="Enviar"><i
+                        class="fas fa-long-arrow-alt-right"></i>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+<!--Footer-->
+{{template "footer"}}
+<!-- end -->
+<script>
+    let slideIndex = 1;
+    function showSlides() {
+        //console.log(slideIndex);
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 6000); // Change image every 2 seconds
+    }
+    showSlides();
+</script>
+
+<!-- Scripts -->
+{{template "script" .}}
+
+{{if eq $.Mensaje_Error "Cancel"}}
+<script>
+
+    Swal.fire({
+        icon: 'error',
+        title: 'Compra Cancelada',
+        text: 'Lo sentimos, tu compra ha sido cancelada.',
+        timer: 2000, // Cerrará automáticamente después de 2 segundos
+        showConfirmButton: false // Oculta el botón de confirmación
+    });
+
+</script>
+{{else if eq $.Mensaje_Error "Correo_ok"}}
+<script>
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Correo enviado',
+        text: 'Su correo, a sido enviado con exito..',
+        timer: 2000, // Cerrará automáticamente después de 2 segundos
+        showConfirmButton: false // Oculta el botón de confirmación
+    });
+
+</script>
+{{else if eq $.Mensaje_Error "Correo_err"}}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Error Al Enviar Correo',
+        text: 'Lo sentimos, no se envio su correo.',
+        timer: 2000, // Cerrará automáticamente después de 2 segundos
+        showConfirmButton: false // Oculta el botón de confirmación
+    });
+
+</script>
+{{end}}

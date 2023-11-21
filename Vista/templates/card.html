@@ -1,0 +1,127 @@
+{{template "main" .}}
+
+<div class="container">
+    <div class="modal__info">
+        <div class="modal__header">
+            <h2><i class="fa-brands fa-opencart"></i>Carrito</h2>
+        </div>
+        <div class="modal__body">
+            <div class="modal__list">
+                {{range .Card}}
+                <label name="{{.ID_card}}" for="" style="color: red; visibility: hidden; padding-left: 62px;font-size: 15px;">Cantidad Maxima Selecionada</label>
+                <div data-card-id="{{.ID_card}}" class="modal__item"style="margin-top: 15px;" >
+
+                    <div class="op">
+                        <span onclick="removeCard('{{.ID_card}}')" class="remove">X</span>
+                        <!--<i class="fas fa-heart"></i>-->
+                    </div>
+
+                    <div class="modal__thumb">
+                        <img src="data:image/jpeg;base64,{{.Img_card}}" class="img-card" alt="">
+                    </div>
+                    <div class="modal__text-product">
+                        <p class="desc">{{.Nombre_card}}</p>
+                        <p class="desc"><strong>${{.Precio_card}}</strong></p>
+                    </div>
+                    <div class="quant">
+                        <span onclick="moreCard('{{.ID_card}}')" class="plus">+</span>
+                        <span id="{{.ID_card}}" class="qt">{{.Cantidad_card}}</span>
+                        <span onclick="lessCard('{{.ID_card}}')" class="minus">-</span>
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        <div class="modal__footer">
+            <div class="modal__list-price">
+                <ul>
+                    <li>Subtotal: <strong id="subtotal-produc">${{.Total}}</strong></li>
+                    <li>Descuento: <strong>$0.00</strong></li>
+                </ul>
+                <h4 id="total-produc" class="modal__total-cart"> Total: ${{.Total}}</h4>
+            </div>
+            <div class="modal__btns">
+                {{if ne $.UserId 0}}
+                <a href="/productos/card/buy" class="btn-primary-modal">Pedido</a>
+                {{else}}
+                <a class="btn-primary-modal" onclick='Registrate()'>Pedido</a>
+                {{end}}
+            </div>
+        </div>
+    </div>
+    <br><br>
+</div>
+<!--Footer-->
+{{template "footer"}}
+<!--end-->
+{{template "script" .}}
+<script>
+    function Registrate() {
+        Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debe estar registrado!',
+        timer: 2000,
+        showConfirmButton: false
+      }).then(() => {
+        window.location.href = "/login";
+      });
+    }
+    function removeCard(id) {
+        Swal.fire({
+            title: 'Estas segur@',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const data = "caso=1&id=" + id;
+                $.ajax({
+                    url: "/operaciones/card/produc",
+                    type: "POST",
+                    data: data,
+                    success: function (response) {
+                        if (response != "ok") {
+                            Swal.fire(
+                                'Eliminado!',
+                                'Su articulo ha sido eliminado.',
+                                'success'
+                            )
+                            var element = document.querySelector('[data-card-id="' + id + '"]');
+                            if (element) {
+                                const subtotal = document.getElementById("subtotal-produc");
+                                const total = document.getElementById("total-produc");
+                                subtotal.textContent = "$" + response;
+                                total.textContent = "Total: $" + response;
+                                const cartCountElement = document.getElementById('cart-count');
+                                cartCountElement.textContent = cartCountElement.textContent - 1;
+                                element.parentNode.removeChild(element);
+                            }
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Error: " + error);
+                    }
+                });
+            }
+        })
+    }
+</script>
+{{if eq .Mensaje_Error "Error"}}
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Agrega algo al carrito!',
+        timer: 3000,
+        showConfirmButton: false
+      }).then(() => {
+        window.location.href = "/productos";
+      });
+    });
+</script>
+{{end}}
